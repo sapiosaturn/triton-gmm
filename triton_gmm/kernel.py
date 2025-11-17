@@ -64,10 +64,10 @@ def _normalize_offsets(
         raise ValueError("offs entries must be non-negative.")
     if (normalized[1:] < normalized[:-1]).any():
         raise ValueError("offs must be non-decreasing.")
-    if normalized[-1].item() != total_rows:
-        raise ValueError(
-            f"offs last value {normalized[-1].item()} must equal the total rows {total_rows}."
-        )
+    # if normalized[-1].item() != total_rows:
+    #     raise ValueError(
+    #         f"offs last value {normalized[-1].item()} must equal the total rows {total_rows}."
+    #     )
     if normalized[-1].item() > torch.iinfo(torch.int32).max:
         raise ValueError("Grouped matmul offsets exceed int32 range.")
     return normalized.to(dtype=torch.int32)
